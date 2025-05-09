@@ -5,3 +5,6 @@ __pycache__/
 db/
 .idea/
 .vscode/
+.streamlit/secrets.toml
+.log
+chroma_db/

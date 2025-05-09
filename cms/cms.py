@@ -2,8 +2,31 @@ import streamlit as st
 import yaml
 import os
 from pathlib import Path
+import requests
 
 st.set_page_config(page_title="Fact-Checking CMS", page_icon="📝")
+
+# Authentication
+def check_auth():
+    if "authenticated" not in st.session_state:
+        st.session_state.authenticated = False
+    if not st.session_state.authenticated:
+        st.title("Login to Fact-Checking CMS")
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+        if st.button("Login"):
+            if (
+                username == st.secrets.auth.username
+                and password == st.secrets.auth.password
+            ):
+                st.session_state.authenticated = True
+                st.rerun()
+            else:
+                st.error("Invalid username or password.")
+        st.stop()
+
+check_auth()
+
 st.title("📝 Fact-Checking CMS")
 st.markdown("Manage war-related facts for the fact-checking chatbot.")
 
@@ -18,6 +41,14 @@ def load_data():
 def save_data(data):
     with open(DATA_PATH, 'w') as f:
         yaml.dump(data, f)
+    try:
+        response = requests.post("http://127.0.0.1:8000/reload-data")
+        if response.status_code == 200:
+            st.success("Data reloaded in chatbot.")
+        else:
+            st.warning("Failed to reload data in chatbot.")
+    except Exception as e:
+        st.warning(f"Error reloading data: {e}")
 
 # Load existing facts
 facts = load_data()
