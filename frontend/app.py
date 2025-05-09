@@ -3,11 +3,11 @@ import requests
 
 st.set_page_config(page_title="Fact-Check Chatbot", page_icon="🤖")
 st.title("🕵️ Fact-Checking Chatbot")
-st.markdown("Ask anything related to the current war or conflict.")
+st.markdown("Ask anything related to the current war or conflict to verify facts.")
 
 API_URL = "http://127.0.0.1:8000/ask"
 
-# Initialize message history in session state if it doesn't exist
+# Initialize message history in session state
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -47,18 +47,17 @@ if user_input:
     # Send the full conversation history to the backend
     try:
         payload = {"messages": valid_messages}
-        #st.write("Sending payload BOOTLEG Sending payload:", payload)  # Debug
         response = requests.post(API_URL, json=payload)
         if response.status_code == 200:
             answer = response.json().get("answer", "No response received.")
         else:
             st.error(f"Error from backend: {response.status_code}")
-            st.write(response.json())  # Show validation errors
+            st.write(response.json())
             answer = "Failed to get a response."
     except Exception as e:
         answer = f"Error: {e}"
 
-    # Show and store assistant's response in session state
+    # Show and store assistant's response
     st.session_state.messages.append({"role": "assistant", "content": answer})
     with st.chat_message("assistant"):
         st.markdown(answer)
