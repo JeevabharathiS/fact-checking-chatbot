@@ -30,7 +30,9 @@ check_auth()
 st.title("📝 Fact-Checking CMS")
 st.markdown("Manage war-related facts for the fact-checking chatbot.")
 
-DATA_PATH = "backend/data/war_data.yaml"
+# DATA_PATH = "backend/data/war_data.yaml"
+DATA_PATH = "C:/Users/Jeevabharathi/What's Cookin/fact-checking-chatbot/backend/data/war_data.yaml"
+
 
 def load_data():
     if not os.path.exists(DATA_PATH):
