@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 import logging
 
-# Configure logging
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class RAGPipeline:
@@ -12,7 +12,7 @@ class RAGPipeline:
         self.data_path = data_path
         self.db_path = db_path
         self.client = chromadb.PersistentClient(path=db_path)
-        # Check if collection exists before deleting
+
         collection_exists = any(col.name == "war_facts" for col in self.client.list_collections())
         if collection_exists:
             self.client.delete_collection(name="war_facts")
@@ -22,7 +22,6 @@ class RAGPipeline:
         self.load_data()
 
     def load_data(self):
-        """Load and index war-related facts from YAML file."""
         logging.info(f"Loading data from {self.data_path}")
         if not os.path.exists(self.data_path):
             logging.warning(f"No data file found at {self.data_path}. Creating empty file.")
@@ -37,7 +36,7 @@ class RAGPipeline:
             logging.error(f"Failed to load YAML file: {e}")
             return
 
-        # Index new data
+
         try:
             for i, item in enumerate(data):
                 if not isinstance(item, dict) or 'fact' not in item:
@@ -54,7 +53,6 @@ class RAGPipeline:
             return
 
     def retrieve(self, query, n_results=3):
-        """Retrieve relevant facts for a given query."""
         try:
             results = self.collection.query(
                 query_texts=[query],

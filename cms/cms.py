@@ -6,7 +6,7 @@ import requests
 
 st.set_page_config(page_title="Fact-Checking CMS", page_icon="📝")
 
-# Authentication
+
 def check_auth():
     if "authenticated" not in st.session_state:
         st.session_state.authenticated = False
@@ -52,10 +52,10 @@ def save_data(data):
     except Exception as e:
         st.warning(f"Error reloading data: {e}")
 
-# Load existing facts
+
 facts = load_data()
 
-# Add new fact
+
 st.subheader("Add New Fact")
 new_fact = st.text_area("Fact", placeholder="Enter the fact here...")
 new_source = st.text_input("Source", placeholder="E.g., Government Press Release")
@@ -69,7 +69,7 @@ if st.button("Add Fact"):
     else:
         st.error("Please fill in all fields.")
 
-# Edit/Delete facts
+
 st.subheader("Manage Existing Facts")
 for i, fact in enumerate(facts):
     with st.expander(f"Fact {i+1}: {fact['fact'][:50]}..."):
