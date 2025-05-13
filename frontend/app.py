@@ -1,9 +1,9 @@
 import streamlit as st
 import requests
 
-st.set_page_config(page_title="Fact-Check Chatbot", page_icon="🤖")
-st.title("Fact-Checking Chatbot")
-st.markdown("Ask anything related to the current war or conflict to verify facts.")
+st.set_page_config(page_title="Sindoor-Scout.Ai", page_icon="🤖")
+st.title("Sindoor-Scout.Ai")
+st.markdown("Ask anything related to the current war or conflict between India and Pakistan to verify facts.")
 
 API_URL = "http://127.0.0.1:8000/ask"
 
