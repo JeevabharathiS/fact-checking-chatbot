@@ -1,4 +1,4 @@
-# Fact-Checking Chatbot
+# Sindoor-Scout.Ai
 
 A fact-checking chatbot to combat misinformation about the 2025 India-Pakistan conflict, including the Pahalgam attack and Operation Sindoor. Built with FastAPI, Streamlit, ChromaDB, and Ollama (Mistral model), it uses a Retrieval-Augmented Generation (RAG) pipeline to provide verified answers from a curated dataset.
 
