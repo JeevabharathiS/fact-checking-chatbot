@@ -129,9 +129,9 @@ fact-checking-chatbot/
 ├── frontend/
 │   └── app.py            # Streamlit frontend for user queries
 ├── cms/
-│   └── cms.py           # Streamlit CMS for fact management
-├── .streamlit/
-│   └── secrets.toml      # CMS credentials
+│   ├── cms.py           # Streamlit CMS for fact management
+│   ├──.streamlit/
+|   │   └── secrets.toml  # CMS credentials
 ├── requirements.txt      # Dependencies
 ├── chatbot.log           # Query and response logs
 └── README.md             # Project documentation
